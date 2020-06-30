@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>itk</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/renderer.js"></script>
+</head>
+
+<body>
+
+    <h2>Windows config</h2>
+
+    <p>
+        <ul>
+            <li>Host name: <code><script>document.write(runShell('systeminfo | find /i "Host Name"').split("Host Name:")[1])</script></code></li>
+            <li>OS: <code><script>document.write(runShell('systeminfo | find /i "OS Name"').split("OS Name:")[1])</script></code></li>
+            <li>OS version: <code><script>document.write(runShell('systeminfo | find /i "OS Version"').split("OS Version:")[1])</script></code></li>
+            <li>Product ID: <code><script>document.write(runShell('systeminfo | find /i "Product ID"').split("Product ID:")[1]) </script></code></li>
+        </ul>
+    </p>
+
+    <p style="text-align: center;">
+        <a href="javascript:window.close();">Close</a>
+    </p>
+
+    <script>
+        // @TESTING
+        // run system info once
+        var sysInfoOutput = runShell("systeminfo");
+
+        // from that, filter out what we need
+        var hostName = sysInfoOutput.split("Host Name:")[1].split("\n")[0];
+        console.log(hostName); 
+
+    </script>
+
+</body>
+
+</html>

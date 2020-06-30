@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>itk</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/renderer.js"></script>
+</head>
+
+<body>
+
+    <h2>Uptime</h2>
+
+    <p style="text-align: center;">
+        Last time the system was booted was:<br>
+        <code><script>document.write(runShell('systeminfo | find /i "Boot Time"').split("System Boot Time:")[1])</script></code>
+    </p>
+
+    <p style="text-align: center;">
+        <a href="javascript:window.close();">Close</a>
+    </p>
+
+</body>
+
+</html>

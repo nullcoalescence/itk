@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>itk</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/renderer.js"></script>
+</head>
+
+<body>
+
+    <h2>Ping</h2>
+
+    <p style="text-align: center;">
+        IP: <input id="ip-field" type="text" size="20">
+        <br>
+        <a href="javascript:ping()">Ping</a>
+        <br>
+        <code id="status"></code>
+    </p>
+
+    <script>
+        function ping() {
+            var ip;
+            if (document.getElementById("ip-field").value == "" || document.getElementById("ip-field").value == null) {
+                document.getElementById("status").innerHTML = "Invalid IP. Try again.";
+                return;
+            }
+
+            ip = document.getElementById("ip-field").value;
+            document.getElementById("status").innerHTML = "Pinging...";
+            var pingResults = runShell("ping " + ip);
+        }
+    </script>
+
+    <p style="text-align: center;">
+        <a href="javascript:window.close();">Close</a>
+    </p>
+
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+/* CSS variables */
+:root {
+
+    /* Fonts */
+    --mono-font: "Consolas", "Courier New", monospace;
+    --standard-font: "Arial", sans-serif;
+    --accent-font: "Arial", "Times New Roman", serif;
+
+    /* Colors */
+    --bg-color: #222831;
+    --fg-color: #eeeeee;
+
+    --link-accent: #5f85db;
+
+    --code-bg-color: lightgray;
+
+}
+
+html, body {
+    font-family: var(--standard-font);
+    margin: 10px;
+    line-height: 1.4;
+    color: var(--fg-color);
+    background-color: var(--bg-color);
+}
+
+a {
+    padding: 3px;
+    border-radius: 3px;
+    color: var(--link-accent);
+    font-family: var(--accent-font);
+}
+
+a:hover {
+    color: var(--bg-color);
+    background-color: var(--link-accent);
+}
+
+code {
+    font-family: var(--mono-font);
+    background-color: var(--code-bg-color);
+    margin: 2.0;
+    color: black;
+}
+
+#log {
+    font-family: var(--mono-font);
+    font-size: 85%;
+    /* Stuck to bottom of page */
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}

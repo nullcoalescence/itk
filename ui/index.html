@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>itk</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script defer src="js/renderer.js"></script>
+</head>
+
+<body>
+
+    <div class="app-header">
+        <h2>itk - IT Toolkit</h2>
+        <span>
+            <a href="javascript:openWin('ui/about.html', 300, 300)">About</a>
+        </span>
+    </div>
+
+    <div class="controls-container">
+        <h3>System analytics</h3>
+        <ul>
+            <li><a href="javascript:openWin('ui/uptime.html', 300, 300)">Uptime</a></li>
+            <li><a href="javascript:openWin('ui/windows_config.html', 400, 600)">Windows config</a></li>
+            <li><a href="#/hardware-config">Hardware config</a></li>
+        </ul>
+    </div>
+
+    <div class="controls-container">
+        <h3>Networking</h3>
+        <ul>
+            <li><a href="javascript:openWin('ui/ping_ip.html', 300, 300);">Ping IP</a></li>
+            <li><a href="#/internet-connection">View internet connection(s)</a></li>
+            <li><a href="#/speed-test">Speedtest</a></li>
+        </ul>
+    </div>
+
+    <div id="log">
+
+    </div>
+
+</body>
+
+</html>
