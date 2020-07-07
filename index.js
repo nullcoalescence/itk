@@ -56,3 +56,7 @@ ipcMain.on("run-shell-command", (event, args) => {
 
 });
 
+// Opens dialog for input()
+function inputDialog(prompt) {
+    
+}

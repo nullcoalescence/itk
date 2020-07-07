@@ -5,38 +5,79 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>itk</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/halfmoon/halfmoon.min.css">
     <link rel="stylesheet" href="css/styles.css">
+    <script defer src="js/halfmoon/halfmoon.min.js"></script>
     <script defer src="js/renderer.js"></script>
 </head>
 
 <body>
 
-    <div class="app-header">
-        <h2>itk - IT Toolkit</h2>
-        <span>
-            <a href="javascript:openWin('ui/about.html', 300, 300)">About</a>
-        </span>
-    </div>
+    <div class="page-wrapper with-navbar">
 
-    <div class="controls-container">
-        <h3>System analytics</h3>
-        <ul>
-            <li><a href="javascript:openWin('ui/uptime.html', 300, 300)">Uptime</a></li>
-            <li><a href="javascript:openWin('ui/windows_config.html', 400, 600)">Windows config</a></li>
-            <li><a href="#/hardware-config">Hardware config</a></li>
-        </ul>
-    </div>
+        <!-- Navbar -->
+        <nav class="navbar">
+            <a class="navbar-brand" href="index.html"><strong>ITK:</strong><span style="padding-left: 3px; padding-right: 3px;"></span>IT Toolkit</a>
+            <span class="navbar-text text-monospace">v1.0</span>
+            <ul class="navbar-nav d-md-flex">
+                <li class="nav-link"><a href="index.html">Home</a></li>
+                <li class="nav-link"><a href="javascript:showAbout()">About</a></li>
+                <li class="nav-link"><a href="javascript:halfmoon.toggleDarkMode();">Dark/light mode</a></li>
+            </ul>
+        </nav>
 
-    <div class="controls-container">
-        <h3>Networking</h3>
-        <ul>
-            <li><a href="javascript:openWin('ui/ping_ip.html', 300, 300);">Ping IP</a></li>
-            <li><a href="#/internet-connection">View internet connection(s)</a></li>
-            <li><a href="#/speed-test">Speedtest</a></li>
-        </ul>
-    </div>
+        <!-- Page content -->
+        <div class="content-wrapper">
+            <div class="controls-container">
+                <h3>System analytics</h3>
+                <ul>
+                    <li><a href="javascript:uptime()">Uptime</a></li>
+                    <li><a href="javascript:openWin('ui/windows_config.html', 400, 600)">Windows config</a></li>
+                    <li><a href="#/hardware-config">Hardware config</a></li>
+                </ul>
+            </div>
 
-    <div id="log">
+            <div class="controls-container">
+                <h3>Active Directory</h3>
+                <ul>
+                    <li><a href="javascript:userInfo()">User info</a></li>
+                </ul>
+            </div>
+
+            <div class="controls-container">
+                <h3>Networking</h3>
+                <ul>
+                    <li><a href="">Ping IP</a></li>
+                    <li><a href="#/internet-connection">View internet connection(s)</a></li>
+                    <li><a href="#/speed-test">Speedtest</a></li>
+                </ul>
+            </div>
+
+            <div id="input-container">
+                <!-- Populated by javascript -->
+                <p>
+                    <span id="input-container--prompt"></span>
+                </p>
+                <p>
+                    <input id="input-container--field" size="20" type="text">
+                </p>
+                <p>
+                    <a id="input-container--submit-btn" href="#">Ok</a>
+                </p>
+            </div>
+
+            <!-- Results modal -->
+            <div class="modal" id="results-modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <h5 class="modal-title" id="results--title"></h5>
+                        <p id="results--content"></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
     </div>
 

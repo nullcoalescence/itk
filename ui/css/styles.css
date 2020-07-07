@@ -3,25 +3,14 @@
 
     /* Fonts */
     --mono-font: "Consolas", "Courier New", monospace;
-    --standard-font: "Arial", sans-serif;
+    --standard-font: "Roboto", sans-serif;
     --accent-font: "Arial", "Times New Roman", serif;
-
-    /* Colors */
-    --bg-color: #222831;
-    --fg-color: #eeeeee;
-
-    --link-accent: #5f85db;
-
-    --code-bg-color: lightgray;
 
 }
 
 html, body {
     font-family: var(--standard-font);
-    margin: 10px;
     line-height: 1.4;
-    color: var(--fg-color);
-    background-color: var(--bg-color);
 }
 
 a {
@@ -43,13 +32,15 @@ code {
     color: black;
 }
 
-#log {
-    font-family: var(--mono-font);
-    font-size: 85%;
-    /* Stuck to bottom of page */
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
+
+/*
+*   Input
+*/
+#input-container {
+    display: none;
     text-align: center;
+}
+
+.modal-content {
+    margin-top: 50px;
 }
