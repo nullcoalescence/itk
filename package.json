@@ -9,10 +9,11 @@
   },
   "author": "ben",
   "license": "ISC",
-  "devDependencies": {
-    "electron": "^8.2.3"
-  },
   "dependencies": {
+    "@sweetalert2/theme-dark": "^3.2.0",
+    "electron": "^8.2.3",
+    "jquery": "^3.5.1",
+    "sweetalert2": "^9.15.3",
     "v8-compile-cache": "^2.1.0"
   }
 }

@@ -39,31 +39,9 @@ function getInput(prompt) {
         return document.getElementById("input-container--field").value.toString();
     }
 }
-
-// Shows results in #results-container
-function showResults(results, title) {
-
-    // Populate and show modal
-    document.getElementById("results--title").innerHTML = title;
-    document.getElementById("results--content").innerHTML = results;
-    halfmoon.toggleModal("results-modal");
-
-}
                                
 // Runs a shell command and returns the output as a string, also supports error handling    
-function runShell(commandStr) {
-    return ipcRenderer.sendSync("run-shell-command", { command: commandStr });
-}
-
-/*
-*   User actions
-*/
-function uptime() {
-    var uptime = runShell('systeminfo | find /i "Boot Time"').split("System Boot Time:")[1];
-    showResults("Last boot time was: " + uptime, "Uptime");
-}
-
-function userInfo() {
-    var username = getInput("Enter username");
-    alert(username);
+function runShell(commandStr, method) {
+    var result = ipcRenderer.sendSync("run-shell-command", { command: commandStr });
+    method(result);
 }

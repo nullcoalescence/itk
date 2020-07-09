@@ -5,25 +5,24 @@ const { exec } = require("child_process");
 
 function createWin() {
     let win = new BrowserWindow({
-        width: 750,
-        height: 750,
-        resizable: false,
+        width: 900,
+        height: 800,
+        resizable: true,
         webPreferences: {
             nodeIntegration: true
         }
     });
 
-    win.loadFile("ui/index.html");
-    //win.webContents.openDevTools(); // @dev
+    win.loadFile("ui/html/index.html");
+    win.webContents.openDevTools(); // @dev
     
     win.once("ready-to-show", () => {
         win.show();
-    })
+    });
 
 }
 
-app.whenReady().then(createWin); // Bad ux
-
+app.whenReady().then(createWin);
 
 // Disable menu for all windows
 app.on("browser-window-created", function(e, win) {
@@ -55,8 +54,3 @@ ipcMain.on("run-shell-command", (event, args) => {
     });
 
 });
-
-// Opens dialog for input()
-function inputDialog(prompt) {
-    
-}

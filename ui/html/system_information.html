@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>itk</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../../node_modules/@sweetalert2/theme-dark/dark.min.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="index.html">ITK</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar-content">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page content -->
+    <div id="page-content">
+
+        <h2>System information</h2>
+
+        <p>
+            <h4>Last boot time</h4>
+            <p>Get system uptime</p>
+            <button class="btn btn-primary" onclick="uptime()">Go</button>
+        </p>
+
+        <p>
+            <h4>Windows config</h4>
+            <p>Get Windows configuration information</p>
+            <button class="btn btn-primary" onclick="windowsConfig()">Go</button>
+        </p>
+
+        <p>
+            <h4>Hardware config</h4>
+            <p>Get hardware information</p>
+            <button class="btn btn-primary" onclick="hardwareConfig()">Go</button>
+        </p>
+
+    </div>
+
+    <!-- Modals -->
+    <div id="results-modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h5 class="modal-title" id="results-modal--title">$title$</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="results-modal--content">$content$</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/renderer.js"></script>
+    <script src="../js/modals.js"></script>
+    <script>window.jQuery = window.$ = require("jquery");</script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+    <script src="../../node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+
+    <script>
+        var modals = require("../js/modals.js");
+        function uptime() {
+            runShell('systeminfo | find /i "Boot Time"', (result) => {
+                var result = result.split("System Boot Time: ")[1];
+                modals.showAlert("Uptime", "This system was last booted <code>" + result + "</code>");
+            });
+        }
+
+        function windowsConfig() {
+            runShell('systeminfo | find /i "OS Name"', (result) => {
+                var outputHTML = "";
+                outputHTML += "<strong>OS</strong>: <code>" + result.split("OS Name: ")[1] + "</code>";
+                runShell('systeminfo | find /i "OS Version"', (result) => {
+                    outputHTML += "<br><strong>Version</strong>: <code>" + result.split("OS Version: ")[1] + "</code>";
+                    runShell('systeminfo | find /i "Registered Owner"', (result) => {
+                        outputHTML += "<br><strong>Registered owner</strong>: <code>" + result.split("Registered Owner: ")[1] + "</code>";
+                        runShell('systeminfo | find /i "Original Install Date"', (result) => {
+                            outputHTML += "<br><strong>Original install date</strong>: <code>" + result.split("Original Install Date: ")[1] + "</code>";
+                            modals.showAlert("Windows config", outputHTML);
+                        });
+                    });
+                });
+            });
+        }
+
+        function hardwareConfig() {
+                runShell('systeminfo | find /i "System Manufacturer"', (result) => {
+                var outputHTML = "";
+                outputHTML += "<strong>OEM</strong>: <code>" + result.split("System Manufacturer: ")[1] + "</code>";
+                runShell('wmic cpu get name', (result) => {
+                    outputHTML += "<br><strong>CPU</strong>: <code>" + result.split("Name")[1] + "</code>";
+                    runShell('systeminfo | find /i "Total Physical Memory"', (result) => {
+                        outputHTML += "<br><strong>RAM</strong>: <code>" + result.split("Total Physical Memory: ")[1] + "</code>";
+                        modals.showAlert("Hardware config", outputHTML);
+                    });
+                });
+            });
+        }
+    </script>
+
+</body>
+
+</html>
